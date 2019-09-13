@@ -2,6 +2,7 @@ $(document).ready(function() {
   var main = {
     init: function() {
       this.activeTasks = [];
+      this.taskLists = [];
       this.optData = [
         { label: 'Option 1', value: '1'},
         { label: 'Option 2', value: '2'},
@@ -77,7 +78,7 @@ $(document).ready(function() {
           $("#task_lists, #run_submit")
             .parents("li")
             .removeClass("d-none");
-            var data = [
+            this.taskLists = [
               {label: 'Option 1', title: 'Option 1', value: '1'},
               {label: 'Option 2', title: 'Option 2', value: '2'},
               {label: 'Option 3', title: 'Option 3', value: '3'},
@@ -113,15 +114,15 @@ $(document).ready(function() {
       var $parent = $('#results_card');
       $parent.empty();
       response.data = [{
-        title: 'title1',success:'3404', error: '4343'
+        title: 'title1',success:'3404', latency: '5443' , error: '4343'
       },{
-        title: 'title2',success:'404', error: '45443'
+        title: 'title2',success:'404', latency: '232', error: '45443'
       },{
-        title: 'title3',success:'7604', error: '433'
+        title: 'title3',success:'7604', latency: '657', error: '433'
       },{
-        title: 'title4',success:'37604', error: '466643'
+        title: 'title4',success:'37604', latency: '324', error: '466643'
       },{
-        title: 'title5',success:'37604', error: '466643'
+        title: 'title5',success:'37604', latency: '775', error: '466643'
       }]
       response.data.forEach(function(val){
         $parent.append(self.getMarkUp(val));
@@ -130,8 +131,11 @@ $(document).ready(function() {
       $parent.removeClass('d-none');
 
     },
+    getSelectedArray: function (){
+
+    },
     getMarkUp: function(res){
-      return '<div class="col-md-6 col-xl-3 mb-4"><div class="border-left-primary card h-100 py-2 shadow"><div class=card-body><div class="align-items-center no-gutters row"><div class="col mr-2 text-center"><div class="font-weight-bold h5 mb-1 text-primary text-sm text-uppercase">' + res.title + '</div><br></div></div><div class="align-items-center no-gutters row"><div class="col mr-2 text-center"><div class="font-weight-bold mb-1 text-sm text-uppercase text-success">Success</div><div class="font-weight-bold h5 mb-0 text-gray-800">' + res.success + '</div></div><div class="col mr-2 text-center"><div class="font-weight-bold mb-1 text-sm text-uppercase text-danger">Failed</div><div class="font-weight-bold h5 mb-0 text-gray-800">' + res.error + '</div></div></div></div></div></div>'
+      return '<div class="col-md-6 col-xl-3 mb-4"><div class="border-left-primary card h-100 py-2 shadow"><div class=card-body><div class="align-items-center no-gutters row"><div class="col mr-2 text-center"><div class="font-weight-bold h5 mb-1 text-primary text-sm text-uppercase">' + res.title + '</div><br></div></div><div class="align-items-center no-gutters row"><div class="col mr-2 text-center"><div class="font-weight-bold mb-1 text-sm text-uppercase text-success">Success</div><div class="font-weight-bold h5 mb-0 text-gray-800">' + res.success + '</div></div><div class="col mr-2 text-center"><div class="font-weight-bold mb-1 text-sm text-uppercase text-warning">Latency</div><div class="font-weight-bold h5 mb-0 text-gray-800">' + res.latency + '</div></div><div class="col mr-2 text-center"><div class="font-weight-bold mb-1 text-sm text-uppercase text-danger">Failed</div><div class="font-weight-bold h5 mb-0 text-gray-800">' + res.error + '</div></div></div></div></div></div>'
     }
   };
   main.init();

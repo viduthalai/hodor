@@ -142,6 +142,8 @@
     .multiselect {
       width: 190px;
       border:1px solid;
+      overflow: hidden;
+      padding-right: 5px;
     }
     .multiselect-container {
       label.checkbox {
