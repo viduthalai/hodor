@@ -39,7 +39,7 @@
             <!-- Divider -->
             <!-- Nav Item - Charts -->
             <li class="nav-item d-none">
-                <strong>Select Brand:</strong>
+                <strong>Select Branch:</strong>
                 <select class="form-control" id="select_brand">
                 </select>
                 <br>
@@ -48,7 +48,7 @@
 
             <!-- Divider -->
             <!-- Nav Item - Charts -->
-            <li class="nav-item d-none">
+            <li class="nav-item  d-none">
                 <strong>Select Profile:</strong>
                 <select class="form-control" id="profiles_list">
                 </select>
@@ -57,14 +57,14 @@
             </li>
 
             <!-- Nav Item - Charts -->
-            <li class="nav-item d-none">
+            <li class="nav-item  d-none">
                 <strong>Select Tasks:</strong>
                 <select id="task_lists" multiple="multiple">
                 </select>
                 <br>
                 <hr class="sidebar-divider">
             </li>
-            <li class="nav-item text-center d-none">
+            <li class="nav-item text-center  d-none">
                 <button type="button" id="run_submit" class="btn btn-info">Run</button>
             </li>
             <br>
@@ -97,8 +97,18 @@
         <div id="content-wrapper" class="d-flex flex-column">
             <!-- Main Content -->
             <div id="content">
+
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                    <div id="notify" style="width: 100%">
+                        <div class="alert alert-info d-none" role="alert">
+                            Active task is updated successfully!!!!
+                        </div>
+                        <div class="alert alert-danger d-none" role="alert">
+                            oops!!! Active task is failed.
+                        </div>
+
+                    </div>
                     <!-- Sidebar Toggle (Topbar) -->
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
@@ -137,12 +147,13 @@
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" id="reset_all"><i
                                 class="fas fa-download fa-sm text-white-50"></i> Reset</a>
                     </div>
                     <!-- Content Row -->
                     <div id="empty_search" class="text-center">
-                        <img src="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/3xempty_new_area_gqaepg" width="350" style="margin-top: 5%;" alt="">
+                        <img src="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/3xempty_new_area_gqaepg"
+                            width="350" style="margin-top: 5%;" alt="">
                     </div>
                     <div class="row d-none" id="results_card">
                         <!-- Earnings (Monthly) Card Example -->
