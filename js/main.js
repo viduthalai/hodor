@@ -85,7 +85,7 @@ $(document).ready(function() {
               {label: 'Option 4', title: 'Option 4', value: '4'},
               {label: 'Option 5', title: 'Option 5', value: '5'},
           ];
-            this.updateDropDowns('task_lists', data, 'multi');
+            this.updateDropDowns('task_lists', this.taskLists, 'multi');
         }, this)
       });
     },
