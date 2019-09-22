@@ -5,7 +5,6 @@
     "scripts": {
         "start": "node_modules/.bin/gulp watch"
     },
-   
     "dependencies": {
         "bootstrap": "4.3.1",
         "jquery": "3.4.1"

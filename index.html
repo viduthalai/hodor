@@ -68,8 +68,7 @@
                 <button type="button" id="run_submit" class="btn btn-info">Run</button>
             </li>
             <br>
-            <br>
-            <br>
+
             <!-- Nav Item - Charts -->
             <span id="update_block" class="d-none">
                 <li class="nav-item ">
@@ -91,6 +90,21 @@
             <!-- Nav Item - Tables -->
             <!-- Divider -->
 
+            <!-- Nav Item - Charts -->
+            <li class="nav-item  d-none">
+                <strong>Select Tasks:</strong>
+                <select id="active_task_lists" multiple="multiple">
+                </select>
+                <br>
+                <hr class="sidebar-divider">
+            </li>
+            <li class="nav-item text-center  d-none">
+                <button type="button" id="stop_submit" class="btn btn-info">Stop</button>
+            </li>
+            <br>
+            <br>
+            <br>
+
         </ul>
         <!-- End of Sidebar -->
         <!-- Content Wrapper -->
@@ -102,10 +116,20 @@
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
                     <div id="notify" style="width: 100%">
                         <div class="alert alert-info d-none" role="alert">
-                            Active task is updated successfully!!!!
+                            Rate updated successfully!!!!
                         </div>
                         <div class="alert alert-danger d-none" role="alert">
-                            oops!!! Active task is failed.
+                            oops!!! Rate update failed.
+                        </div>
+
+                    </div>
+
+                    <div id="stop_notify" style="width: 100%">
+                        <div class="alert alert-info d-none" role="alert">
+                            Tasks stopped successfully!!!!
+                        </div>
+                        <div class="alert alert-danger d-none" role="alert">
+                            oops!!! Stop tasks failed.
                         </div>
 
                     </div>
