@@ -85,6 +85,15 @@
                 <li class="nav-item text-center">
                     <button type="button" id="update_submit" class="btn btn-info">Update</button>
                 </li>
+                <br>
+                <div id="notify" style="width: 100%">
+                    <div class="alert alert-info d-none" role="alert">
+                        Rate updated successfully!!!!
+                    </div>
+                    <div class="alert alert-danger d-none" role="alert">
+                        oops!!! Rate update failed.
+                    </div>
+                </div>
             </span>
 
             <!-- Nav Item - Tables -->
@@ -102,6 +111,14 @@
                 <button type="button" id="stop_submit" class="btn btn-info">Stop</button>
             </li>
             <br>
+            <div id="stop_notify" style="width: 100%">
+                <div class="alert alert-info d-none" role="alert">
+                    Tasks stopped successfully!!!!
+                </div>
+                <div class="alert alert-danger d-none" role="alert">
+                    oops!!! Stop tasks failed.
+                </div>
+            </div>
             <br>
             <br>
 
@@ -114,25 +131,7 @@
 
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-                    <div id="notify" style="width: 100%">
-                        <div class="alert alert-info d-none" role="alert">
-                            Rate updated successfully!!!!
-                        </div>
-                        <div class="alert alert-danger d-none" role="alert">
-                            oops!!! Rate update failed.
-                        </div>
-
-                    </div>
-
-                    <div id="stop_notify" style="width: 100%">
-                        <div class="alert alert-info d-none" role="alert">
-                            Tasks stopped successfully!!!!
-                        </div>
-                        <div class="alert alert-danger d-none" role="alert">
-                            oops!!! Stop tasks failed.
-                        </div>
-
-                    </div>
+    
                     <!-- Sidebar Toggle (Topbar) -->
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>

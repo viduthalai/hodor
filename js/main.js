@@ -41,7 +41,7 @@ $(document).ready(function() {
         $("#" + nodeId).multiselect("rebuild");
       } else {
         $("#" + nodeId).append(
-          "<option value=" + "" + "> Select One </option>");
+          "<option value=" + "" + "> Select </option>");
         $.map(val, function(x) {
           return $("#" + nodeId).append(
             "<option value=" + x + ">" + x + "</option>"
@@ -98,7 +98,6 @@ $(document).ready(function() {
       });
     },
     submitTasks: function(e) {
-      $(e.currentTarget).attr("disabled", "disabled");
       var selectedTasks = $("#task_lists").val();
       var self = this;
       var tasks = "";
@@ -174,13 +173,17 @@ $(document).ready(function() {
         method: "GET",
         // data: { selectedBrand: selectedTasks },
         success: $.proxy(function(response) {
-          $("#active_task")
+          if(response.length > 0){
+            $("#active_task")
             .parents("li")
             .removeClass("d-none");
-          this.paintResults();
-
-          this.updateDropDowns("active_task", response, "single");
-          $("#update_block").removeClass("d-none");
+            this.paintResults(response);
+            this.updateDropDowns("active_task", response, "single");
+            $("#update_block").removeClass("d-none");
+          } else {
+            clearInterval(this.startGetResults);
+          }
+          
         }, this)
       });
     },
