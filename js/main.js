@@ -40,6 +40,7 @@ $(document).ready(function() {
         $("#" + nodeId).multiselect("dataprovider", data);
         $("#" + nodeId).multiselect("rebuild");
       } else {
+          $("#" + nodeId).empty();
         $("#" + nodeId).append(
           "<option value=" + "" + "> Select </option>");
         $.map(val, function(x) {
@@ -115,15 +116,11 @@ $(document).ready(function() {
             .removeClass("d-none");
 
           this.updateDropDowns("active_task_lists", selectedTasks, "multi");
-          self.getTasksResults(response);
-          this.startGetResults = setInterval(function() {
-            self.getTasksResults(response);
-          }, 10000);
+          self.getActiveTasks(response);
         }, this)
       });
     },
     stopTasks: function(e) {
-      $(e.currentTarget).attr("disabled", "disabled");
       var selectedTasks = $("#active_task_lists").val();
       var self = this;
       var tasks = "";
@@ -143,7 +140,7 @@ $(document).ready(function() {
           }
           setTimeout(function() {
             $("#stop_notify .alert").addClass("d-none");
-          }, 5000);
+          }, 5000)
         }, this)
       });
     },
@@ -166,67 +163,58 @@ $(document).ready(function() {
         }, this)
       });
     },
-    getTasksResults: function(response) {
+    getActiveTasks: function(response) {
+      var self = this
       $.ajax({
         url: "http://localhost:8080/api/v1/hudor/getActiveTasks",
         dataType: "json",
         method: "GET",
         // data: { selectedBrand: selectedTasks },
         success: $.proxy(function(response) {
+          console.log(response);
           if(response.length > 0){
             $("#active_task")
             .parents("li")
             .removeClass("d-none");
-            this.paintResults(response);
             this.updateDropDowns("active_task", response, "single");
             $("#update_block").removeClass("d-none");
+            self.getTasksResults();
+            this.startGetResults = setInterval(function() {
+              self.getTasksResults(response);
+            }, 10000);
           } else {
+            console.log("clearning results");
             clearInterval(this.startGetResults);
           }
-          
+
+        }, this)
+      });
+    },
+    getTasksResults: function(response) {
+      $.ajax({
+        url: "http://localhost:8080/api/v1/hudor/getresults",
+        dataType: "json",
+        method: "GET",
+        // data: { selectedBrand: selectedTasks },
+        success: $.proxy(function(response) {
+          if(response.length > 0){
+            this.paintResults(response);
+          } else {
+              $("#results_card").empty()
+              clearInterval(this.startGetResults);
+          }
+
         }, this)
       });
     },
     paintResults: function(response) {
-      response = {};
       var self = this;
       var $parent = $("#results_card");
       $parent.empty();
-      response.data = [
-        {
-          title: "title1",
-          success: "3404",
-          latency: "5443",
-          error: "4343"
-        },
-        {
-          title: "title2",
-          success: "404",
-          latency: "232",
-          error: "45443"
-        },
-        {
-          title: "title3",
-          success: "7604",
-          latency: "657",
-          error: "433"
-        },
-        {
-          title: "title4",
-          success: "37604",
-          latency: "324",
-          error: "466643"
-        },
-        {
-          title: "title5",
-          success: "37604",
-          latency: "775",
-          error: "466643"
-        }
-      ];
       setTimeout(
         $.proxy(function() {
-          response.data.forEach(function(val) {
+          response.forEach(function(val) {
+            val = JSON.parse(val)
             $parent.append(self.getMarkUp(val));
           });
         }, this),
@@ -243,9 +231,9 @@ $(document).ready(function() {
         res.title +
         '</div><br></div></div><div class="align-items-center no-gutters row"><div class="col mr-2 text-center"><div class="font-weight-bold mb-1 text-sm text-uppercase text-success">Success</div><div class="font-weight-bold h5 mb-0 text-gray-800">' +
         res.success +
-        '</div></div><div class="col mr-2 text-center"><div class="font-weight-bold mb-1 text-sm text-uppercase text-warning">Latency</div><div class="font-weight-bold h5 mb-0 text-gray-800">' +
-        res.latency +
-        '</div></div><div class="col mr-2 text-center"><div class="font-weight-bold mb-1 text-sm text-uppercase text-danger">Failed</div><div class="font-weight-bold h5 mb-0 text-gray-800">' +
+        '</div></div><div class="col mr-2 text-center"><div class="font-weight-bold mb-1 text-sm text-uppercase text-warning">Rate</div><div class="font-weight-bold h5 mb-0 text-gray-800">' +
+        res.rate +
+        '</div></div><div class="col mr-2 text-center"><div class="font-weight-bold mb-1 text-sm text-uppercase text-danger">ERROR</div><div class="font-weight-bold h5 mb-0 text-gray-800">' +
         res.error +
         "</div></div></div></div></div></div>"
       );
